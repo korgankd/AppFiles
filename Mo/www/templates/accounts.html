@@ -1,0 +1,32 @@
+<ion-view view-title="Browse">
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="account in accounts" href="#/app/accounts/{{account.id}}">
+        <div class="list card" ng-controller="AccountsCtrl">
+          <div class="item">
+            <h3>{{account.name}}</h3>
+            <h2>{{account.name}}</h2>
+            <p>{{account.name}}</p>
+          </div>
+          <div class="item item-body">
+            <p>{{account.description}}</p>
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item">
+              <i class="icon ion-thumbsup"></i>
+              Like
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-chatbox"></i>
+              Comment
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-share"></i>
+              Share
+            </a>
+          </div>
+        </div>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

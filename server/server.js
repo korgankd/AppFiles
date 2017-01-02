@@ -2,6 +2,7 @@ var express = require('express'),
     bodyParser      = require('body-parser'),
     methodOverride  = require('method-override'),
     sessions        = require('./routes/sessions'),
+    accounts		= require('./routes/accounts')
     app = express();
 
 app.use(bodyParser.json());
@@ -17,6 +18,8 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+app.get('/accounts', accounts.findAll);
+app.get('/accounts/:id', accounts.findById);
 app.get('/sessions', sessions.findAll);
 app.get('/sessions/:id', sessions.findById);
 

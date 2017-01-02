@@ -41,6 +41,14 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
+.controller('AccountsCtrl', function($scope, Account) {
+    $scope.accounts = Account.query();
+    var show = true;
+})
+
+.controller('AccountCtrl', function($scope, $stateParams, Account) {
+    $scope.account = Account.get({accountId: $stateParams.accountId});
+})
 
 .controller('SessionsCtrl', function($scope, Session) {
     $scope.sessions = Session.query();

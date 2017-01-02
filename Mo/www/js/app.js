@@ -50,6 +50,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
+  .state('app.accounts', {
+    url: "/accounts",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/accounts.html",
+        controller: 'AccountsCtrl'
+      }
+    }
+  })
+
+  .state('app.account', {
+    url: "/accounts/accountId",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/account.html",
+        controller: 'AccountCtrl'
+      }
+    }
+  })
+
   .state('app.sessions', {
     url: "/sessions",
     views: {
