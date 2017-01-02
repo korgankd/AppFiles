@@ -1,0 +1,12 @@
+Sidemenu: (Guest User)
+- Search
+- Login
+- Settings
+
+Sidemenu: (Account == MyProfile)
+- Search
+- MyProfile
+- Logout
+- Settings
+
+Sidemenu: (Account != MyProfile)??
