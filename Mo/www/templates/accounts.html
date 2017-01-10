@@ -1,7 +1,7 @@
 <ion-view view-title="Browse">
   <ion-content>
     <ion-list>
-      <ion-item ng-repeat="account in accounts" href="#/app/accounts/{{account.id}}">
+      <ion-item ng-repeat="account in accounts" ng-click="dothis(event)">
         <div class="list card" ng-controller="AccountsCtrl">
           <div class="item">
             <h3><b>Username:</b> {{account.user}}</h3>
@@ -9,9 +9,10 @@
             <p><b>Location:</b> {{account.location}}</p>
           </div>
           <div class="item item-body">
-            <p><b>Discription:</b> {{account.description}}<br>
-              <img src="{{account.image}}" style="width:200px; height:200px;"/>
+            <p><b>Discription:</b> {{account.description}}
             </p>
+              <img src="{{account.image}}" style="width:200px; height:200px;"/>
+              <video src="{{account.video}}" type="video/mp4" style="width:200px; height:200px;"></video>
           </div>
           <div class="item tabs tabs-secondary tabs-icon-left">
             <a class="tab-item">

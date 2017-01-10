@@ -41,6 +41,10 @@ angular.module('starter.controllers', ['starter.services'])
   };
 })
 
+.controller('SearchCtrl', function($scope) {
+
+})
+
 .controller('AccountsCtrl', function($scope, Account) {
     $scope.accounts = Account.query();
     var show = true;
