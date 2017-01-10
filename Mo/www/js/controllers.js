@@ -47,7 +47,12 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('AccountsCtrl', function($scope, Account) {
     $scope.accounts = Account.query();
-    var show = true;
+    var ourRequest = new XMLHttpRequest();
+    ourRequest.open('GET', 'https://raw.githubusercontent.com/korgankd/AppFiles/master/server/routes/accounts.json');
+    ourRequest.onload = function() {
+      var ourData = JSON.parse(ourRequest.responseText);
+    }
+    ourRequest.send();
 })
 
 .controller('AccountCtrl', function($scope, $stateParams, Account) {
