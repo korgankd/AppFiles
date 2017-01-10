@@ -1,6 +1,5 @@
 [
-	{
-		//"id":0, 
+	{ 
 		"user":"korgankd", 
 		"password":"password", 
 		"name":"Kent Korgan", 
@@ -11,7 +10,6 @@
 		"video":"http://a.video.nfl.com/films/s2013/nflcom/w15/131215_phl_wk15_bp_no_brees_1yd_td_run_3200k.mp4"
 	},
 	{
-		"id":1, 
 		"user":"kentcl", 
 		"password":"password", 
 		"name":"Clark Kent", 
