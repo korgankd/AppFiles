@@ -1,7 +1,7 @@
-angular.module('starter.controllers', ['starter.services'])
+angular.module('starter.controllers', ['starter.services','ionic.cloud'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
-
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicAuth, $ionicUser) {
+  var details = {"email":"hi@ionic.io","password":"password"};
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -12,6 +12,20 @@ angular.module('starter.controllers', ['starter.services'])
   // Form data for the login modal
   $scope.loginData = {};
 
+  $scope.doRegister = function() {
+    $ionicAuth.signup(details).then(function(){
+      alert("user signup hi@ionic.io, password");
+    }, function(err) {
+    for (var e of err.details) {
+      if (e === 'conflict_email') {
+        alert('Email already exists.');
+      } else {
+        alert(e);
+      }
+    }
+  });
+    alert("do Register funtion!");
+  }
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -31,8 +45,8 @@ angular.module('starter.controllers', ['starter.services'])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
+    alert("do login function!");
+    ourRequest.send();
     // Simulate a login delay. Remove this and replace with your login
     // code if using a login system
     $timeout(function() {
@@ -42,17 +56,20 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('SearchCtrl', function($scope) {
-
+  $scope.output = "new output";
 })
 
 .controller('AccountsCtrl', function($scope, Account) {
-    $scope.accounts = Account.query();
+    $scope.accounts = [
+      {id:0, user:"korgankd", password:"password", name:"Kent Korgan", description: "This is the description of the Kent Korgan account. It should give some information about this user.", availability:"Kent's availability", media:"Kent's media", location:"11257 Ramrod Road, Woodbridge VA", image:"http://i.huffpost.com/gen/964776/images/o-CATS-KILL-BILLIONS-facebook.jpg"},
+      {id:1, user:"kentcl", password:"password", name:"Clark Kent", description: "This is the description of the Clark Kent account. It should give some information about this user.", availability:"Clark's availability", media:"Clark's media", location:"North Pole Fortress of Solitude", image:"http://i.huffpost.com/gen/964776/images/o-CATS-KILL-BILLIONS-facebook.jpg"}
+    ];/*
     var ourRequest = new XMLHttpRequest();
     ourRequest.open('GET', 'https://raw.githubusercontent.com/korgankd/AppFiles/master/server/routes/accounts.json');
     ourRequest.onload = function() {
       var ourData = JSON.parse(ourRequest.responseText);
     }
-    ourRequest.send();
+    ourRequest.send();*/
 })
 
 .controller('AccountCtrl', function($scope, $stateParams, Account) {
@@ -61,7 +78,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('SessionsCtrl', function($scope, Session) {
     $scope.sessions = Session.query();
-    var show = true;
+    
 })
 
 .controller('SessionCtrl', function($scope, $stateParams, Session) {
