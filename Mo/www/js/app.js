@@ -41,21 +41,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     controller: 'AppCtrl'
   })
 
+  .state('app.profile', {
+    url: '/profile',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/profile.html',
+        controller: 'ProfileCtrl'
+      }
+    }
+  })
+  
   .state('app.search', {
     url: '/search',
     views: {
       'menuContent': {
         templateUrl: 'templates/search.html',
         controller: 'SearchCtrl'
-      }
-    }
-  })
-
-  .state('app.browse', {
-    url: '/browse',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/browse.html'
       }
     }
   })
@@ -76,26 +77,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       'menuContent': {
         templateUrl: "templates/account.html",
         controller: 'AccountCtrl'
-      }
-    }
-  })
-
-  .state('app.sessions', {
-    url: "/sessions",
-    views: {
-      'menuContent': {
-        templateUrl: "templates/sessions.html",
-        controller: 'SessionsCtrl'
-      }
-    }
-  })
-
-  .state('app.session', {
-    url: '/sessions/sessionId',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/session.html',
-        controller: 'SessionCtrl'
       }
     }
   });

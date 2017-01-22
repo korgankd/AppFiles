@@ -1,0 +1,41 @@
+<ion-view view-title="Profile">
+  <ion-content>
+    <br><br>
+        <div class="list card" ng-controller="ProfileCtrl">
+          <div class="item">
+            <h3><b>Username:</b><span id="username"> {{user.username}} </span></h3>
+            <h2><b>Name:</b><div id="name"> {{user.name}} </div></h2>
+            <p><b>Location:</b><div id="location"> {{user.location}} </div></p>
+          </div>
+          <div class="item item-body">
+            <p><b>Discription:</b><div id="description"> {{user.description}} </div>
+            </p>
+            <ion-list>
+              <ion-item><!--ng-repeat="account in accounts" //image in images >-->
+                <img src="{{user.image}}" style="width:200px; height:200px;"/>
+              </ion-item>
+            </ion-list>
+          </div>
+          <div class="item tabs tabs-secondary tabs-icon-left">
+            <a class="tab-item">
+              <i class="icon ion-thumbsup"></i>
+              Like
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-chatbox"></i>
+              Review
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-share"></i>
+              Share
+            </a>
+            <a class="tab-item">
+              <i class="icon ion-checkmark"></i>
+              Book
+            </a>
+          </div>
+        </div>
+        <button ng-click="checkAuth()">Check Auth</button>
+        <button ng-click="logout()">Logout</button>
+  </ion-content>
+</ion-view>

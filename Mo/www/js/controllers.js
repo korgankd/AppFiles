@@ -1,7 +1,8 @@
 angular.module('starter.controllers', ['starter.services','ionic.cloud'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $ionicAuth, $ionicUser) {
-  var details = {"email":"hi@ionic.io","password":"password"};
+  $scope.user = {"username":"Not logged in."};
+  $scope.loginData = {};
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -9,23 +10,6 @@ angular.module('starter.controllers', ['starter.services','ionic.cloud'])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // Form data for the login modal
-  $scope.loginData = {};
-
-  $scope.doRegister = function() {
-    $ionicAuth.signup(details).then(function(){
-      alert("user signup hi@ionic.io, password");
-    }, function(err) {
-    for (var e of err.details) {
-      if (e === 'conflict_email') {
-        alert('Email already exists.');
-      } else {
-        alert(e);
-      }
-    }
-  });
-    alert("do Register funtion!");
-  }
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/login.html', {
     scope: $scope
@@ -45,13 +29,54 @@ angular.module('starter.controllers', ['starter.services','ionic.cloud'])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    alert("do login function!");
-    ourRequest.send();
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+    var details = {"email": $scope.loginData.email, "password": $scope.loginData.password};
+    $ionicAuth.login('basic', details).then(function() {
+      alert($ionicAuth.isAuthenticated());
+      $scope.modal.hide();
+
+      $scope.user = $ionicUser.details;
+      console.log($scope.user);
+
+    }, function(err) {
+        for (var e of err.details) {
+          alert(e);
+        }
+    });
+  };
+
+  $scope.doRegister = function() {
+    var details = {"email": $scope.loginData.email, "username": $scope.loginData.username, "password": $scope.loginData.password};
+    $ionicAuth.signup(details).then(function(){
+      alert("Signup Success! " + details.username);
+    }, function(err) {
+      for (var e of err.details) {
+        if (e === 'conflict_email') {
+          alert('Email already exists.');
+        } else {
+          alert(e);
+        }
+      }
+    });
+  }
+
+})
+
+.controller('ProfileCtrl', function($scope, $ionicModal, $timeout, $ionicAuth, $ionicUser) {
+  if($ionicAuth.isAuthenticated()) {
+    $scope.user = $ionicUser.details;
+    if($scope.user.description == undefined) {
+      document.getElementById("description").innerHTML = '<input type="text" ng-model="userData.description">';
+    }
+  }
+
+  $scope.checkAuth = function() {
+    alert($ionicAuth.isAuthenticated() + " " + $ionicUser.details.name);
+  };
+
+  $scope.logout = function() {
+    $ionicAuth.logout();
+    $scope.user = {};
+    alert("Successfully logged out.");
   };
 })
 
@@ -74,13 +99,4 @@ angular.module('starter.controllers', ['starter.services','ionic.cloud'])
 
 .controller('AccountCtrl', function($scope, $stateParams, Account) {
     $scope.account = Account.get({accountId: $stateParams.accountId});
-})
-
-.controller('SessionsCtrl', function($scope, Session) {
-    $scope.sessions = Session.query();
-    
-})
-
-.controller('SessionCtrl', function($scope, $stateParams, Session) {
-    $scope.session = Session.get({sessionId: $stateParams.sessionId});
 });
