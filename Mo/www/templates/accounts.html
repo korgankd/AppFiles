@@ -1,5 +1,8 @@
 <ion-view view-title="Browse">
   <ion-content>
+  <br>
+  <button ng-click="dbConnect()">DBCONNECT</button>
+  <button ng-click="displayUsers()">display users</button>
     <ion-list>
       <ion-item ng-repeat="account in accounts" ng-click="dothis(event)">
         <div class="list card" ng-controller="AccountsCtrl">

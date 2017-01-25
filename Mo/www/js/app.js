@@ -11,11 +11,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   $ionicCloudProvider.init({
     "core": {
       "app_id": "7c763073"
+    },
+    "database": {
+      "authType": "authenticated"
     }
   });
 })
 
 .run(function($ionicPlatform) {
+  
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -50,7 +54,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       }
     }
   })
-  
+
   .state('app.search', {
     url: '/search',
     views: {
