@@ -11,8 +11,11 @@ angular.module('starter.controllers', ['starter.services','ionic.cloud'])
   //});
 
   // Create the login modal that we will use later
-$ionicModal.fromTemplateUrl('templates/login.html', {     scope: $scope
-}).then(function(modal) {     $scope.modal = modal;   });
+  $ionicModal.fromTemplateUrl('templates/login.html', {     
+  scope: $scope
+    }).then(function(modal) {     
+  $scope.modal = modal;   
+  });
 
   // Triggered in the login modal to close it
   $scope.closeLogin = function() {
@@ -153,6 +156,7 @@ $ionicModal.fromTemplateUrl('templates/login.html', {     scope: $scope
 .controller('AccountsCtrl', function($scope, $ionicDB, Account) {
   $scope.dbConnect = function() {
     $ionicDB.connect();
+    alert("connected");
   };
 
   $scope.displayUsers = function() {
